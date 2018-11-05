@@ -40,25 +40,25 @@ ES_TIMEOUT = 30
 
 ES_DOCTYPE = {
     "properties": {
-        "LinkedAccountId": {"type": "string"},
-        "InvoiceID": {"type": "string", "index": "not_analyzed"},
-        "RecordType": {"type": "string"},
-        "RecordId": {"type": "string", "index": "not_analyzed"},
-        "UsageType": {"type": "string", "index": "not_analyzed"},
+        "LinkedAccountId": {"type": "text"},
+        "InvoiceID": {"type": "keyword", "index": "false"},
+        "RecordType": {"type": "text"},
+        "RecordId": {"type": "keyword", "index": "false"},
+        "UsageType": {"type": "keyword", "index": "false"},
         "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
-        "ItemDescription": {"type": "string", "index": "not_analyzed"},
-        "ProductName": {"type": "string", "index": "not_analyzed"},
-        "RateId": {"type": "string"},
+        "ItemDescription": {"type": "keyword", "index": "false"},
+        "ProductName": {"type": "keyword", "index": "false"},
+        "RateId": {"type": "text"},
         "Rate": {"type": "float"},
-        "AvailabilityZone": {"type": "string", "index": "not_analyzed"},
-        "PricingPlanId": {"type": "string", "index": "not_analyzed"},
-        "ResourceId": {"type": "string", "index": "not_analyzed"},
+        "AvailabilityZone": {"type": "keyword", "index": "false"},
+        "PricingPlanId": {"type": "keyword", "index": "false"},
+        "ResourceId": {"type": "keyword", "index": "false"},
         "Cost": {"type": "float"},
-        "PayerAccountId": {"type": "string", "index": "not_analyzed"},
-        "SubscriptionId": {"type": "string", "index": "not_analyzed"},
+        "PayerAccountId": {"type": "keyword", "index": "false"},
+        "SubscriptionId": {"type": "keyword", "index": "false"},
         "UsageQuantity": {"type": "float"},
-        "Operation": {"type": "string"},
-        "ReservedInstance": {"type": "string", "index": "not_analyzed"},
+        "Operation": {"type": "text"},
+        "ReservedInstance": {"type": "keyword", "index": "false"},
         "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
         "BlendedCost": {"type": "float"},
         "BlendedRate": {"type": "float"},
@@ -70,8 +70,8 @@ ES_DOCTYPE = {
                 "match": "*",
                 "match_mapping_type": "string",
                 "mapping": {
-                    "type": "string",
-                    "index": "not_analyzed"
+                    "type": "keyword",
+                    "index": "false"
                 }
             }
         }
