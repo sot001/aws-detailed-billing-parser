@@ -39,6 +39,11 @@ For example:
     $ cd aws-detailed-billing-parser
     $ python setup.py install
 
+Tweaks
+------
+
+Edit the config.py file to alter how each element is handled, whether it is indexed or otherwise, then reinstall as shown above
+
 Executing
 ---------
 
@@ -72,6 +77,14 @@ TODO (Features to incorporate in the dbrparser)
 
 Changes
 -------
+
+Version up to 0.5.8 - 2018-11-06
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Update to ElasticSearch requirements and others
+- Fixing the parser so its compatible with ES V6.4
+- Tweaks to some of the indexable elements in config.py
+
 Version 0.5.4 - 2017-08-29
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
