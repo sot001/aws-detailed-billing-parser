@@ -107,7 +107,8 @@ def analytics(config, echo):
         result_cost = 1.0 / (v.get('Cost') / v.get('Count')) if v.get('Cost') else 0.00
         result_unblended = 1.0 / (v.get('Unblended') / v.get('Count')) if v.get('Unblended') else 0.0
 
-        response = es.index(index=index_name, doc_type='ec2_per_usd',
+        #response = es.index(index=index_name, doc_type='ec2_per_usd',
+        response = es.index(index=index_name, doc_type=config.es_doctype,
                             body={'UsageStartDate': k,
                                   'EPU_Cost': result_cost,
                                   'EPU_UnBlended': result_unblended})
@@ -129,7 +130,8 @@ def analytics(config, echo):
 
         ri_coverage = float(analytics_day_only[k]["RI"]) / float(analytics_day_only[k]["Count"])
         spot_coverage = float(analytics_day_only[k]["Spot"]) / float(analytics_day_only[k]["Count"])
-        response = es.index(index=index_name, doc_type='elasticity',
+        #response = es.index(index=index_name, doc_type='elasticity',
+        response = es.index(index=index_name, doc_type=config.es_doctype,
                             body={'UsageStartDate': k + ' 12:00:00',
                                   'Elasticity': elasticity,
                                   'ReservedCoverage': ri_coverage,

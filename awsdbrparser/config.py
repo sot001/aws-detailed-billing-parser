@@ -41,24 +41,23 @@ ES_TIMEOUT = 30
 ES_DOCTYPE = {
     "properties": {
         "LinkedAccountId": {"type": "text"},
-        "InvoiceID": {"type": "keyword", "index": "false"},
+        "InvoiceID": {"type": "text"},
         "RecordType": {"type": "text"},
         "RecordId": {"type": "keyword", "index": "false"},
-        "UsageType": {"type": "keyword", "index": "false"},
         "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
-        "ItemDescription": {"type": "keyword", "index": "false"},
-        "ProductName": {"type": "keyword", "index": "false"},
+        "ItemDescription": {"type": "text"},
         "RateId": {"type": "text"},
         "Rate": {"type": "float"},
-        "AvailabilityZone": {"type": "keyword", "index": "false"},
-        "PricingPlanId": {"type": "keyword", "index": "false"},
-        "ResourceId": {"type": "keyword", "index": "false"},
+        "AvailabilityZone": {"type": "text"},
+        "PricingPlanId": {"type": "text"},
+        "ResourceId": {"type": "text"},
         "Cost": {"type": "float"},
-        "PayerAccountId": {"type": "keyword", "index": "false"},
-        "SubscriptionId": {"type": "keyword", "index": "false"},
+	"ProductName": {"type": "keyword", "index": "false"},
+        "PayerAccountId": {"type": "text"},
+        "SubscriptionId": {"type": "text"},
         "UsageQuantity": {"type": "float"},
         "Operation": {"type": "text"},
-        "ReservedInstance": {"type": "keyword", "index": "false"},
+        "ReservedInstance": {"type": "text"},
         "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
         "BlendedCost": {"type": "float"},
         "BlendedRate": {"type": "float"},
@@ -66,14 +65,26 @@ ES_DOCTYPE = {
         "UnBlendedRate": {"type": "float"}
     }, "dynamic_templates": [
         {
-            "notanalyzed": {
-                "match": "*",
-                "match_mapping_type": "string",
-                "mapping": {
-                    "type": "keyword",
-                    "index": "false"
-                }
+          "integers": {
+            "match_mapping_type": "long",
+            "mapping": {
+              "type": "integer"
             }
+          }
+        },
+        {
+          "strings": {
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "text",
+              "fields": {
+                "raw": {
+                  "type":  "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
         }
     ]
 }
