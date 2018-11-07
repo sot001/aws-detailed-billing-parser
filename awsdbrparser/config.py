@@ -40,7 +40,7 @@ ES_TIMEOUT = 30
 
 ES_DOCTYPE = {
     "properties": {
-        "LinkedAccountId": {"type": "text"},
+        "LinkedAccountId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
         "InvoiceID": {"type": "text"},
         "RecordType": {"type": "text"},
         "RecordId": {"type": "keyword", "index": "false"},
@@ -52,7 +52,7 @@ ES_DOCTYPE = {
         "PricingPlanId": {"type": "text"},
         "ResourceId": {"type": "text"},
         "Cost": {"type": "float"},
-	"ProductName": {"type": "keyword", "index": "false"},
+	"ProductName": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
         "PayerAccountId": {"type": "text"},
         "SubscriptionId": {"type": "text"},
         "UsageQuantity": {"type": "float"},
