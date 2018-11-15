@@ -62,7 +62,7 @@ setup(
     long_description=read('README.rst'),
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
-    #zip_safe=False,
+    zip_safe=False,
     platforms='any',
     install_requires=read_requirements(),
     entry_points={
