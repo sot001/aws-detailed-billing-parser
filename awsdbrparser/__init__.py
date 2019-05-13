@@ -23,4 +23,3 @@ __email__ = "koiker@amazon.com"
 #__version__ = '0.5.8'
 __date__ = "2019-03-26"
 __version__ = '0.6.0'
->>>>>>> upstream/master
