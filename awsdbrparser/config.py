@@ -95,7 +95,8 @@ DEFAULT_ES2 = True
 DATA_PATH = 'data'
 DOCTYPE_FILES = {
     '2': 'dbr_doctype_es2x.json',
-    '6': 'dbr_doctype_es6x.json'
+    '6': 'dbr_doctype_es6x.json',
+    '7': 'dbr_doctype_es7x.json'
 }
 
 """
