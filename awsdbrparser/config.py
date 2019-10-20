@@ -41,56 +41,6 @@ PROCESS_OPTIONS = (
 BULK_SIZE = 1000
 ES_TIMEOUT = 30
 
-#ES_DOCTYPE = {
-#    "properties": {
-#        "LinkedAccountId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
-#        "InvoiceID": {"type": "text"},
-#        "RecordType": {"type": "text"},
-#        "RecordId": {"type": "keyword", "index": "false"},
-#        "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
-#        "ItemDescription": {"type": "text"},
-#        "RateId": {"type": "text"},
-#        "Rate": {"type": "float"},
-#        "AvailabilityZone": {"type": "text"},
-#        "PricingPlanId": {"type": "text"},
-#        "ResourceId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
-#        "Cost": {"type": "float"},
-#	      "ProductName": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
-#        "PayerAccountId": {"type": "text"},
-#        "SubscriptionId": {"type": "text"},
-#        "UsageQuantity": {"type": "float"},
-#        "Operation": {"type": "text"},
-#        "ReservedInstance": {"type": "text"},
-#        "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
-#        "BlendedCost": {"type": "float"},
-#        "BlendedRate": {"type": "float"},
-#        "UnBlendedCost": {"type": "float"},
-#        "UnBlendedRate": {"type": "float"}
-#    }, "dynamic_templates": [
-#        {
-#          "integers": {
-#            "match_mapping_type": "long",
-#            "mapping": {
-#              "type": "integer"
-#            }
-#          }
-#        },
-#        {
-#          "strings": {
-#            "match_mapping_type": "string",
-#            "mapping": {
-#              "type": "text",
-#              "fields": {
-#                "raw": {
-#                  "type":  "keyword",
-#                  "ignore_above": 256
-#                }
-#              }
-#            }
-#          }
-#        }
-#    ]
-
 DEFAULT_ES2 = True
 DATA_PATH = 'data'
 DOCTYPE_FILES = {
@@ -256,7 +206,9 @@ class Config(object):
             return '{}-{:d}-{:02d}'.format(self.es_index, self.es_year, self.es_month)
         else:
             # if using Elasticsearch 6.x the index is just the prefix <index-name>
-            return self.es_index
+       #     return self.es_index
+            # no, we want to index by month
+            return '{}-{:d}-{:02d}'.format(self.es_index, self.es_year, self.es_month)
 
 
     @output_filename.setter
