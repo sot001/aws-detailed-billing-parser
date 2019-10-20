@@ -206,8 +206,8 @@ def parse(config, verbose=False):
         if config.delete_index:
             echo('Deleting current index: {}'.format(config.index_name))
             es.indices.delete(config.index_name, ignore=404)
-        es.indices.create(config.index_name, ignore=400)
-        es.indices.put_mapping(index=config.index_name, doc_type=config.es_doctype, body=config.mapping)
+        es.indices.create(config.index_name, ignore=400, include_type_name=True)
+        es.indices.put_mapping(index=config.index_name, doc_type=config.es_doctype, body=config.mapping, include_type_name=True)
 
     if verbose:
         progressbar = click.progressbar

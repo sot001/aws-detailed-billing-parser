@@ -1,6 +1,5 @@
 {
     "properties": {
-        "type": {"type": "keyword"},
         "LinkedAccountId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
         "InvoiceID": {"type": "text"},
         "RecordType": {"type": "text"},
