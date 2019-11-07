@@ -1,24 +1,23 @@
 {
     "properties": {
-        "LinkedAccountId": {"type": "string"},
-        "InvoiceID": {"type": "string", "index": "not_analyzed"},
-        "RecordType": {"type": "string"},
-        "RecordId": {"type": "string", "index": "not_analyzed"},
-        "UsageType": {"type": "string", "index": "not_analyzed"},
+        "LinkedAccountId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
+        "InvoiceID": {"type": "text"},
+        "RecordType": {"type": "text"},
+        "RecordId": {"type": "keyword", "index": "false"},
         "UsageEndDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
-        "ItemDescription": {"type": "string", "index": "not_analyzed"},
-        "ProductName": {"type": "string", "index": "not_analyzed"},
-        "RateId": {"type": "string"},
+        "ItemDescription": {"type": "text"},
+        "RateId": {"type": "text"},
         "Rate": {"type": "float"},
-        "AvailabilityZone": {"type": "string", "index": "not_analyzed"},
-        "PricingPlanId": {"type": "string", "index": "not_analyzed"},
-        "ResourceId": {"type": "string", "index": "not_analyzed"},
+        "AvailabilityZone": {"type": "text"},
+        "PricingPlanId": {"type": "text"},
+        "ResourceId": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
         "Cost": {"type": "float"},
-        "PayerAccountId": {"type": "string", "index": "not_analyzed"},
-        "SubscriptionId": {"type": "string", "index": "not_analyzed"},
+       "ProductName": {"type": "text", "fields": { "raw": { "type":  "keyword"}}},
+        "PayerAccountId": {"type": "text"},
+        "SubscriptionId": {"type": "text"},
         "UsageQuantity": {"type": "float"},
-        "Operation": {"type": "string"},
-        "ReservedInstance": {"type": "string", "index": "not_analyzed"},
+        "Operation": {"type": "text"},
+        "ReservedInstance": {"type": "text"},
         "UsageStartDate": {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"},
         "BlendedCost": {"type": "float"},
         "BlendedRate": {"type": "float"},
@@ -26,14 +25,26 @@
         "UnBlendedRate": {"type": "float"}
     }, "dynamic_templates": [
         {
-            "notanalyzed": {
-                "match": "*",
-                "match_mapping_type": "string",
-                "mapping": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                }
+          "integers": {
+            "match_mapping_type": "long",
+            "mapping": {
+              "type": "integer"
             }
+          }
+        },
+        {
+          "strings": {
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "text",
+              "fields": {
+                "raw": {
+                  "type":  "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
         }
     ]
 }
