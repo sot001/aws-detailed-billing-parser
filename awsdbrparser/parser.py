@@ -126,7 +126,7 @@ def analytics(config, echo):
                                   'EPU_Cost': result_cost,
                                   'EPU_UnBlended': result_unblended})
         if not response.get('created'):
-            echo('[!] Unable to send document to ES!')
+            echo('[!] Unable to send cost document to ES!')
 
     # Elasticity
     #
@@ -166,7 +166,7 @@ def analytics(config, echo):
                                   'SpotCoverage': spot_coverage})
 
         if not response.get('created'):
-            echo('[!] Unable to send document to ES!')
+            echo('[!] Unable to send elasticity document to ES!')
 
     file_in.close()
     # Finished Processing
