@@ -102,11 +102,11 @@ def analytics(config, echo):
     # Some DBR files has Cost (Single Account) and some has (Un)BlendedCost (Consolidated Account)
     # In this case we try to process both, but one will be zero and we need to check
     # TODO: use a single variable and an flag to output Cost or Unblended
-  #  if config.es2:
-  #      index_name = config.index_name
-  #  else:
-  #      index_name = 'ec2_per_usd'
-    index_name = config.index_name
+    #if config.es2:
+    #    index_name = config.index_name
+    #else:
+    #    index_name = 'ec2_per_usd'
+    index_name = 'ec2_per_usd'
     if not es.indices.exists(index=index_name):
         es.indices.create(index_name, ignore=400, body={
             "mappings": {
@@ -137,7 +137,7 @@ def analytics(config, echo):
   #      index_name = config.index_name
   #  else:
   #      index_name = 'elasticity'
-    index_name = config.index_name
+    index_name = 'elasticity'
     if not es.indices.exists(index=index_name):
         es.indices.create(index_name, ignore=400, body={
             "mappings": {
