@@ -111,7 +111,7 @@ def analytics(config, echo):
             "mappings": {
                 "ec2_per_usd": {
                     "properties": {
-                        "UsageStartDate" : {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"}
+                        "UsageStartDate" : {"type": "date", "format": "yyyy-MM-dd HH:mm:ss"}
                     }
                 }
             }
@@ -141,7 +141,7 @@ def analytics(config, echo):
             "mappings": {
                 "elasticity": {
                     "properties": {
-                        "UsageStartDate" : {"type": "date", "format": "YYYY-MM-dd HH:mm:ss"}
+                        "UsageStartDate" : {"type": "date", "format": "yyyy-MM-dd HH:mm:ss"}
                     }
                 }
             }
