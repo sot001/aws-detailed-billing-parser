@@ -255,7 +255,9 @@ class Config(object):
             return '{}-{:d}-{:02d}'.format(self.es_index, self.es_year, self.es_month)
         else:
             # if using Elasticsearch 6.x the index is just the prefix <index-name>
-            return self.es_index
+            # return self.es_index
+            # no, we want to index by month
+            return '{}-{:d}-{:02d}'.format(self.es_index, self.es_year, self.es_month)
 
 
     @output_filename.setter
