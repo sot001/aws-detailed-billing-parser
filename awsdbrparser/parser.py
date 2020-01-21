@@ -61,7 +61,7 @@ def analytics(config, echo):
             awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, 'es',
                                session_token=credentials.token)
 
-    es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], timeout=config.es_timeout, http_auth=awsauth,
+    es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], timeout=config.es_timeout, http_auth=('billing_insert', 'billing_insert'),
                        connection_class=RequestsHttpConnection)
     es.indices.create(config.index_name, ignore=400)
     es.indices.create(config.es_doctype, ignore=400)
