@@ -62,6 +62,8 @@ class Config(object):
         # elasticsearch default values
         self.es_host = 'search-name-hash.region.es.amazonaws.com'
         self.es_port = 80
+        self.es_user = 'billing_user'
+        self.es_pass = 'billing_pass'
         self.es_index = 'billing'
         self.es_doctype = 'billing'
         self.es_year = today.year

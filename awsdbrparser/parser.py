@@ -26,8 +26,11 @@ import time
 
 import boto3
 import click
-from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers
+from elasticsearch import Elasticsearch, RequestsHttpConnection, helpers, TransportError
 from requests_aws4auth import AWS4Auth
+
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 from . import utils
 from .config import PROCESS_BY_BULK, PROCESS_BY_LINE, PROCESS_BI_ONLY
@@ -61,8 +64,15 @@ def analytics(config, echo):
             awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, 'es',
                                session_token=credentials.token)
 
-    es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], timeout=config.es_timeout, http_auth=('billing_insert', 'billing_insert'),
-                       connection_class=RequestsHttpConnection)
+    try:
+      es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], 
+            timeout=config.es_timeout, 
+            http_auth=(config.es_user, config_es_pass),
+            use_ssl=True,
+            verify_certs=False)
+    except TransportError as e:
+      print("ERROR: " + str(e))
+
     es.indices.create(config.index_name, ignore=400)
     es.indices.create(config.es_doctype, ignore=400)
 
@@ -193,7 +203,7 @@ def parse(config, verbose=False):
         file_out = open(config.output_filename, 'w')
 
     elif config.output_to_elasticsearch:
-        echo('Sending DBR to Elasticsearch host: {}:{}'.format(config.es_host, config.es_port))
+        echo('Sending DBR to Elasticsearch host: {}:{} as {}'.format(config.es_host, config.es_port, confif.es_user))
         awsauth = None
         if config.awsauth:
             session = boto3.Session()
@@ -203,8 +213,15 @@ def parse(config, verbose=False):
                 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, 'es',
                                    session_token=credentials.token)
 
-        es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], timeout=config.es_timeout,
-                           http_auth=awsauth, connection_class=RequestsHttpConnection)
+        try:
+          es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}], 
+                timeout=config.es_timeout, 
+                http_auth=(config.es_user, config_es_pass),
+                use_ssl=True,
+                verify_certs=False)
+        except TransportError as e:
+          print("ERROR: " + str(e))
+
         if config.delete_index:
             echo('Deleting current index: {}'.format(config.index_name))
             es.indices.delete(config.index_name, ignore=404)
