@@ -396,8 +396,8 @@ def parse(config, verbose=False):
             echo('Control messages: {}'.format(control))
             echo('')
 
-    except TransportError as e:
-      print("ERROR: " + str(e))
+        except TransportError as e:
+          print("ERROR: " + str(e))
 
     return Summary(added, skipped, updated, control)
 
