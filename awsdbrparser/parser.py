@@ -67,6 +67,8 @@ def analytics(config, echo):
     try:
         es = Elasticsearch([{'host': config.es_host, 'port': config.es_port}],
             timeout=config.es_timeout,
+            use_ssl=True,
+            ssl_show_warn=False,
             http_auth=(config.es_user, config.es_pass),
             connection_class=RequestsHttpConnection,
             verify_certs=False)
@@ -220,6 +222,8 @@ def parse(config, verbose=False):
                                 timeout=config.es_timeout,
                                 http_auth=(config.es_user, config.es_pass),
                                 connection_class=RequestsHttpConnection,
+                                use_ssl=True,
+                                ssl_show_warn=False,
                                 verify_certs=False)
 
 
